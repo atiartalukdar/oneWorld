@@ -8,15 +8,23 @@
      <LinearLayout
          android:orientation="vertical"
          android:layout_width="match_parent"
-         android:layout_height="match_parent"
+         android:layout_height="0dp"
          android:background="#acd2d7"
+         android:layout_weight="5"
          android:layout_gravity="center_horizontal">
 
+         <SearchView
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:id="@+id/searchView"
+             android:layout_gravity="center_horizontal" />
      </LinearLayout>
 
      <LinearLayout
          android:orientation="vertical"
          android:layout_width="match_parent"
-         android:layout_height="wrap_content"
+         android:layout_height="0dp"
+         android:background="#ffff00"
+         android:layout_weight="1"
          android:layout_gravity="center_horizontal"></LinearLayout>
  </LinearLayout>
