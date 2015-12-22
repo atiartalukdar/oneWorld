@@ -1,6 +1,7 @@
 package com.oneworld.talukdar.oneworld;
 
 import android.content.Intent;
+import android.net.MailTo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -14,15 +15,21 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
     }
-    public void countryBtn(View V){
+
+
+    public void continentBtn(View view){
         Intent intent =new Intent(this,listView.class);
+        intent.putExtra("key", "1");
         startActivity(intent);
+    }
+    public void countryBtn(View view){
+        Intent intent =new Intent(this,listView.class);
+        intent.putExtra("key", "2");
+        startActivity(intent);
+
     }
 
-    public void continentBtn(View V){
-        Intent intent =new Intent(this,listView.class);
-        startActivity(intent);
-    }
+
 
 
 

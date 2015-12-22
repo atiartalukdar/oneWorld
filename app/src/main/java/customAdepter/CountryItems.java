@@ -20,6 +20,12 @@ public class CountryItems {
     int Flag;
     int Currency_Symbol;
 
+    public CountryItems(String countryName, String capital, int flag) {
+        this.countryName = countryName;
+        Capital = capital;
+        Flag = flag;
+    }
+
     public CountryItems(int ID, String countryName, String continent,String capital, int population,
                         int GDP, String currency_Type, int size, int phone_Code, int flag, int currency_Symbol) {
         this.ID = ID;
