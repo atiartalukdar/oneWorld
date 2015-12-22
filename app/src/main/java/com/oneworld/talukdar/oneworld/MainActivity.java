@@ -15,12 +15,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
     public void countryBtn(View V){
-        Intent intent =new Intent(this,CountryDetails.class);
+        Intent intent =new Intent(this,listView.class);
         startActivity(intent);
     }
 
     public void continentBtn(View V){
-        Intent intent =new Intent(this,CountryDetails.class);
+        Intent intent =new Intent(this,listView.class);
         startActivity(intent);
     }
 
