@@ -1,6 +1,7 @@
 package com.oneworld.talukdar.oneworld;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.MailTo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,12 +9,17 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-public class MainActivity extends AppCompatActivity {
+import database.DBHelper;
 
+public class MainActivity extends AppCompatActivity {
+DBHelper dbHelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        dbHelper = new DBHelper(this);
+        SQLiteDatabase sqLiteDatabase = dbHelper.getWritableDatabase();
     }
 
 
