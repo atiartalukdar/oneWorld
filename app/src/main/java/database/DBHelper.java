@@ -10,8 +10,8 @@ import android.database.sqlite.SQLiteOpenHelper;
  */
 public class DBHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "Country_Details";
-    private static final String TABLE_NAME = "Asia";
-    private static final int VERSION_CODE = 3;
+    private static final String TABLE_NAME = "AsiaTable";
+    private static final int VERSION_CODE = 4;
     private static final String UID = "_id";
     private  static final String NAME = "Name";
     private static final String CREATE_TABLE = "CREATE TABLE "+TABLE_NAME+" ("+UID+" INTEGER PRIMARY KEY AUTOINCREMENT, "+NAME+" VARCHAR(255));";
