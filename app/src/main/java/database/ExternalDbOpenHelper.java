@@ -9,6 +9,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -114,11 +115,16 @@ public class ExternalDbOpenHelper extends SQLiteOpenHelper {
     }
     @Override
     public void onCreate(SQLiteDatabase db) {}
+
+    private static final String TABLE_NAME = "Continent";
+    private static final String TABLE_NAME1 = "Countries";
+
+    private static final String DROP_TABLE = "DROP TABLE IF EXISTS  "+TABLE_NAME;
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         try {
             Message.message(context,"onUpgrade is Called");
-            db.execSQL(DROP_TABLE);
+            db.execSQL(DROP_TABLE);   //I've two table in my database
             onCreate(db);
         } catch (SQLException e) {
             Message.message(context, "" + e);
