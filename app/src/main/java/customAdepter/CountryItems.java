@@ -6,6 +6,15 @@ package customAdepter;
 
 
 public class CountryItems {
+    //For Continent
+    int ID_Continent;
+    String Continent_Continent;
+    String Population_Continent;
+    String Density_People_Per_Km_Continent;
+    String Density_People_Per_Mile_Continent;
+    String Most_Populas_city_Continent;
+
+    //For Countries
     int ID;
     String countryName;
     String Continent;
@@ -24,6 +33,21 @@ public class CountryItems {
         this.countryName = countryName;
         Capital = capital;
         Flag = flag;
+    }
+
+    public CountryItems(String continent_Continent, String population_Continent) {
+        Continent_Continent = continent_Continent;
+        Population_Continent = population_Continent;
+    }
+
+    public CountryItems(int ID_Continent, String continent_Continent, String density_People_Per_Km_Continent,
+                        String population_Continent, String density_People_Per_Mile_Continent, String most_Populas_city_Continent) {
+        this.ID_Continent = ID_Continent;
+        Continent_Continent = continent_Continent;
+        Density_People_Per_Km_Continent = density_People_Per_Km_Continent;
+        Population_Continent = population_Continent;
+        Density_People_Per_Mile_Continent = density_People_Per_Mile_Continent;
+        Most_Populas_city_Continent = most_Populas_city_Continent;
     }
 
     public CountryItems(int ID, String countryName, String continent,String capital, int population,

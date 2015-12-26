@@ -116,18 +116,17 @@ public class ExternalDbOpenHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {}
 
-    private static final String TABLE_NAME = "Continent";
+/*    private static final String TABLE_NAME = "Continent";
     private static final String TABLE_NAME1 = "Countries";
-
-    private static final String DROP_TABLE = "DROP TABLE IF EXISTS  "+TABLE_NAME;
+    private static final String DROP_TABLE = "DROP TABLE IF EXISTS  "+TABLE_NAME;*/
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        try {
+        /*try {
             Message.message(context,"onUpgrade is Called");
             db.execSQL(DROP_TABLE);   //I've two table in my database
             onCreate(db);
         } catch (SQLException e) {
             Message.message(context, "" + e);
-        }
+        }*/
     }
 }
