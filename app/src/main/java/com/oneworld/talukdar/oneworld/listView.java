@@ -1,8 +1,10 @@
 package com.oneworld.talukdar.oneworld;
 
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,7 +19,9 @@ import java.util.ArrayList;
 
 import customAdepter.CountryAdepter;
 import customAdepter.CountryItems;
+import database.DBHelper;
 import database.ExternalDbOpenHelper;
+import database.Message;
 
 public class listView extends AppCompatActivity {
 
@@ -25,6 +29,7 @@ public class listView extends AppCompatActivity {
     CountryAdepter countryAdepter;
     ListView listView;
     private SQLiteDatabase database;
+
 
     private static final String DB_NAME = "Country_Details.db";
 
@@ -43,33 +48,20 @@ public class listView extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_view);
         listView = (ListView)findViewById(R.id.listView);
-        Log.i("listView", "C1");
 
         ExternalDbOpenHelper dbOpenHelper = new ExternalDbOpenHelper(this, DB_NAME);
         database = dbOpenHelper.openDataBase();
-        fillFreinds();
+
+        String s =getAllData();
+        Message.message(this,s);
+
+        /*CountryItems details = new CountryItems("Asia","Bangladesh",R.drawable.bhutan);
+        countryItems.add(details);*/
+       // fillList();
         setUpList();
 
-        /*String[] Continents_SortBy_Population = new String[]{"Asia", "Africa","North America","South America","Antarctica","Europe","Australia"};
-        String[] Continents_SortBy_Name = new String[]{ "Africa","Antarctica","Asia","Australia","Europe","North America","South America"};
-
-        String[] Countries_Asia = new String[]{"Afghanistan","Bangladesh","Bhutan","Brunei"};
-        String[] Capital_Asia = new String[]{"Kabul","Dhaka","Thimphu","Bandar Seri Begawan"};*/
 
 
-
-/*        CountryItems Afghanistan = new CountryItems("Afghanistan","Kabul",R.drawable.afghanistan);
-        CountryItems Bangladesh = new CountryItems("Bangladesh","Dhaka",R.drawable.bangladesh);
-        CountryItems Bhutan = new CountryItems("Bhutan","Thimphu",R.drawable.bhutan);
-        CountryItems Brunei = new CountryItems("Brunei","Bandar Seri Begawan",R.drawable.brunei);
-
-        countryItems.add(Afghanistan);
-        countryItems.add(Bangladesh);
-        countryItems.add(Bhutan);
-        countryItems.add(Brunei);
-
-        countryAdepter = new CountryAdepter(this, countryItems);
-        listView.setAdapter(countryAdepter);*/
 
 
         Intent intent = getIntent();
@@ -85,9 +77,9 @@ public class listView extends AppCompatActivity {
     }
 
 
-    private void fillFreinds() {
+/*    private void fillList() {
         //friends = new ArrayList<String>();  which was countryItems
-        String[] columns = {UID,CONTINENT,AREA_KM,POPULATION,DENSITY_KM,DENSITY_MILE,MOST_POPULAS_CITY};
+        //String[] columns = {UID,CONTINENT,AREA_KM,POPULATION,DENSITY_KM,DENSITY_MILE,MOST_POPULAS_CITY};
         Cursor continentNameCorsor = database.query(TABLE_NAME,new String[]{CONTINENT},null, null, null, null,null);
         Log.i("listView", "C1");
         Cursor populationCorsor = database.query(TABLE_NAME,new String[]{POPULATION},null, null, null, null,null);
@@ -110,8 +102,39 @@ public class listView extends AppCompatActivity {
         }
         continentNameCorsor.close();
         populationCorsor.close();
-    }
+    }*/
 
+    public String getAllData(){
+
+
+
+        // SELECT _id,Name,Password from Continent //Table
+        String[] columns = {UID,CONTINENT,AREA_KM,POPULATION,DENSITY_KM,DENSITY_MILE,MOST_POPULAS_CITY};
+        Cursor cursor = database.query(TABLE_NAME, columns, null, null, null, null, null);
+
+        StringBuffer buffer = new StringBuffer();
+        while(cursor.moveToNext()){
+            Context context=getApplicationContext();
+
+            int continent_Index = cursor.getColumnIndex(CONTINENT);
+            int population_Index = cursor.getColumnIndex(MOST_POPULAS_CITY);
+
+            int cid = cursor.getInt(0);
+            String name = cursor.getString(continent_Index);
+            String nameLowerCase = name.toLowerCase().replaceAll("\\s+","");
+
+            String pass = cursor.getString(population_Index);
+            int id = context.getResources().getIdentifier(nameLowerCase, "drawable", context.getPackageName());
+            //Drawable d = getResources().getDrawable(id);
+
+            CountryItems details = new CountryItems(name,pass,id);
+            countryItems.add(details);
+
+            buffer.append(cid+" "+nameLowerCase+" "+pass+ "\n");
+        }
+        cursor.close();
+        return buffer.toString();
+    }
 
 
     private void setUpList() {
@@ -121,12 +144,11 @@ public class listView extends AppCompatActivity {
         countryAdepter = new CountryAdepter(this, countryItems);
         listView.setAdapter(countryAdepter);
 
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id) {
-                Toast.makeText(getApplicationContext(),
-                        ((TextView) view).getText().toString(),
-                        Toast.LENGTH_SHORT).show();
+            public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
+
+                Toast.makeText(getApplicationContext(),"Clicked",Toast.LENGTH_SHORT).show();
             }
         });
     }

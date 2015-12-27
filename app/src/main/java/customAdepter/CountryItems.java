@@ -1,5 +1,10 @@
 package customAdepter;
 
+import android.graphics.drawable.Drawable;
+import android.widget.ImageView;
+
+import com.oneworld.talukdar.oneworld.R;
+
 /**
  * Created by Talukdar on 12/22/2015.
  */
@@ -28,6 +33,7 @@ public class CountryItems {
     // let's leave these blank for the time being
     int Flag;
     int Currency_Symbol;
+
 
     public CountryItems(String countryName, String capital, int flag) {
         this.countryName = countryName;

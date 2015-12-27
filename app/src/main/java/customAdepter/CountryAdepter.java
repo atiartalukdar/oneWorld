@@ -1,6 +1,8 @@
 package customAdepter;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
+import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,13 +29,15 @@ public class CountryAdepter extends ArrayAdapter<CountryItems> {
 
         TextView nameTextView = (TextView)view.findViewById(R.id.item_name);
         TextView nickTextView = (TextView)view.findViewById(R.id.item_nick);
-       // ImageView imageView = (ImageView)view.findViewById(R.id.item_image);
+        ImageView imageView = (ImageView)view.findViewById(R.id.item_image);
 
         CountryItems countryItems = getItem(position);
 
         nameTextView.setText(countryItems.countryName);
         nickTextView.setText(countryItems.Capital);
-        //imageView.setImageResource(countryItems.Flag);
+
+        imageView.setImageResource(countryItems.Flag);
+
         return view;
     }
 
