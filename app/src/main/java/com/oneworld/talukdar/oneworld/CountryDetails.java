@@ -42,7 +42,7 @@ private String[] elements;
 
     ImageView imageView;
     TextView countryTV;
-    String data;
+    String data,data1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,11 +51,12 @@ private String[] elements;
 
         Intent intent = getIntent();
         data = intent.getExtras().getString("key1");
+        data1 = intent.getExtras().getString("ss");
 
         //In elements[0] will contain the clicked items position, & elements[1] will contain the database table name;
         elements = data.split(" ");
-
-        getAllData();
+        countryTV.setText(data1);
+       // getAllData();
     }
 
 

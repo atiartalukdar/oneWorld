@@ -25,6 +25,7 @@ import database.Message;
 
 public class listView extends AppCompatActivity {
 
+    Intent intentNext;
     final ArrayList<CountryItems> countryItems = new ArrayList<>();
     CountryAdepter countryAdepter;
     ListView listView;
@@ -93,16 +94,26 @@ public class listView extends AppCompatActivity {
          while(cursor.moveToNext()){
              Context context=getApplicationContext();
 
+            //Getting the Index number from database
              int Index_Continent = cursor.getColumnIndex(CONTINENT);
+             int Index_Area_KM = cursor.getColumnIndex(AREA_KM);
              int Index_POPULATION = cursor.getColumnIndex(POPULATION);
+             int Index_Density_KM = cursor.getColumnIndex(DENSITY_KM);
+             int Index_Density_Mile = cursor.getColumnIndex(DENSITY_MILE);
+             int Index_Populas_City = cursor.getColumnIndex(MOST_POPULAS_CITY);
 
+            //getting the particular data from db by using index
              int cid = cursor.getInt(0);
              String name = cursor.getString(Index_Continent);
+             String Area_KM = cursor.getString(Index_Area_KM);
              String population = cursor.getString(Index_POPULATION);
+             String Density_KM = cursor.getString(Index_Density_KM);
+             String Density_Mile = cursor.getString(Index_Density_Mile);
+             String Populas_City = cursor.getString(Index_Populas_City);
 
+             //getting the drawable name from drawable folder by name column from db
              String nameLowerCase = name.toLowerCase().replaceAll("\\s+", "");
              int id = context.getResources().getIdentifier(nameLowerCase, "drawable", context.getPackageName());
-             //Drawable d = getResources().getDrawable(id);
 
              CountryItems details = new CountryItems(name,population,id);
              countryItems.add(details);
@@ -152,11 +163,19 @@ public class listView extends AppCompatActivity {
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
-                Intent intent =new Intent(listView.this,CountryDetails.class);
-                intent.putExtra("key1", position+1+" "+data);
-                startActivity(intent);
+                intentNext =new Intent(listView.this,CountryDetails.class);
+                intentNext.putExtra("key1", position+1+" "+data);
+
+                startActivity(intentNext);
                 Toast.makeText(getApplicationContext(),"Clicked",Toast.LENGTH_SHORT).show();
             }
         });
     }
+
+    private  void bindIntentWithData(int position){
+        intentNext.putExtra("getCountryName", ""+countryItems.get(position).getCountryName());
+        intentNext.putExtra("getCountryName", ""+countryItems.get(position).getCountryName());
+        intentNext.putExtra("getCountryName", ""+countryItems.get(position).getCountryName());
+    }
+
 }
