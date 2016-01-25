@@ -64,60 +64,6 @@ private String[] elements;
 
 
         public void getAllData(){
-        // SELECT _id,Name,Password from Continent //Table
-        Cursor cursor=null;
-        String[] columns_Continent = {UID,CONTINENT,AREA_KM,POPULATION,DENSITY_KM,DENSITY_MILE,MOST_POPULAS_CITY};
-        String[] columns_country = {UID_C,CONTINENT_C,COUNTRY_C,CAPITAL_C,CURRENCY_C,REGION_C,POPULATION_C,
-                AREA_KM_C,DENSITY_MILE_C,GBP_C,LITERACY_C,PHONE_CODE_C};
-
-        if(elements[1].trim().equals("1")){
-           Toast.makeText(getApplicationContext(), "One", Toast.LENGTH_LONG).show();
-            cursor = database.query(TABLE_NAME, columns_Continent, UID+" = '"+Integer.parseInt(elements[0])+"'", null, null, null, null);
-            while(cursor.moveToNext()){
-                Context context=getApplicationContext();
-
-                int Index_Continent = cursor.getColumnIndex(CONTINENT);
-                int Index_POPULATION = cursor.getColumnIndex(POPULATION);
-
-                int cid = cursor.getInt(0);
-                String name = cursor.getString(Index_Continent);
-                String population = cursor.getString(Index_POPULATION);
-
-                String nameLowerCase = name.toLowerCase().replaceAll("\\s+", "");
-                int id = context.getResources().getIdentifier(nameLowerCase, "drawable", context.getPackageName());
-                //Drawable d = getResources().getDrawable(id);
-
-                countryTV.setText(name);
-            }
-            cursor.close();
-            database.close();
-        }
-    /*    if(data.equals("2")){
-            Toast.makeText(getApplicationContext(),"Two",Toast.LENGTH_LONG).show();
-            cursor = database.query(TABLE_NAME_COUNTRY, columns_country, null, null, null, null, null);
-            while(cursor.moveToNext()){
-                Context context=getApplicationContext();
-
-                int country_Index = cursor.getColumnIndex(COUNTRY_C);
-                int capital_Index = cursor.getColumnIndex(CAPITAL_C);
-
-                int cid = cursor.getInt(0);
-                String name = cursor.getString(country_Index);
-                String population = cursor.getString(capital_Index);
-
-                String nameLowerCase = name.toLowerCase().replaceAll("\\s+", "");
-                int id = context.getResources().getIdentifier(nameLowerCase, "drawable", context.getPackageName());
-                //Drawable d = getResources().getDrawable(id);
-
-                CountryItems details = new CountryItems(name,population,id);
-                countryItems.add(details);
-
-                buffer.append(cid + " " + name + " " + population + "\n");
-            }
-            cursor.close();
-            database.close();
-        }*/
-
 
     }
 
